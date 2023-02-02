@@ -1,16 +1,16 @@
 <?php
-    require "../proc/valores.php";
+    require "../proc/consultar.php";
 
-    foreach($personas as $persona){ ?>
+    /*foreach($personas as $persona){ ?>
 			<tr>
 				<td><?php echo $persona->id ?></td>
 				<td><?php echo $persona->nombre ?></td>
 				<td><?php echo $persona->apellidos ?></td>
 				<td><?php echo $persona->sexo ?></td>
 			</tr>
-<?php } ?>
+<?php }*/ ?>
 
-<h1>HOME muestra los ingresos mensuales</h1>
+<h1>Transacciones</h1>
 
 <table>
     <tr>
