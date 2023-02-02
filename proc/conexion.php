@@ -1,16 +1,19 @@
 <?php
-    $db = "transacciones";
-    $servidor = "localhost";
-    $usuario = "root";
-    $password = "";
+    /* Declaro las credenciales para realizar la conexión con la DB */
+    $servidor   = "localhost";
+    $nombre_db  = "transacciones";
+    $usuario    = "root";
+    $clave      = "";
 
+    /* Inicio la conexión + verificando excepciones */
     try {
-        $conexion = new PDO("mysql:host=$servidor;dbname=$db", $usuario, $password);      
+        $conexion = new PDO("mysql:host=$servidor;dbname=$nombre_db", $usuario, $clave);      
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Conexión realizada Satisfactoriamente";
+
+        // echo "Conexión realizada Satisfactoriamente";
     }catch(PDOException $e){
-        echo "La conexión ha fallado: " . $e->getMessage();
+        echo "<h2>La conexión ha fallado: " . $e->getMessage() . "</h2>";
     }
  
-//   $conexion = null;
+    // $conexion = null;
 ?>

@@ -1,5 +1,5 @@
 <?php
-    require "../proc/consultar.php";
+    require "proc/consultar.php";
 
     /*foreach($personas as $persona){ ?>
 			<tr>
