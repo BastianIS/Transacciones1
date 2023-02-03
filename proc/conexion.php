@@ -14,6 +14,4 @@
     }catch(PDOException $e){
         echo "<h2>La conexión ha fallado: " . $e->getMessage() . "</h2>";
     }
- 
-    // $conexion = null;
 ?>

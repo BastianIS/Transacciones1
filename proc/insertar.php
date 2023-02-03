@@ -18,23 +18,42 @@
         $monto_movimiento *= -1;
     }
 
-    echo "<hr>
-            tipo_movimiento: " . (($tipo_movimiento == 1) ? "Ingreso" : "Egreso" ) . "<br>
-            fecha_movimiento: " . date("d/m/Y", strtotime($fecha_movimiento)) . "<br>
-            monto_movimiento: " . number_format($monto_movimiento, 2, ",", ".") . "<br>
-            comentario_movimiento: $comentario_movimiento";
+    /* Ruteo y validación (TEMPORAL) */
+    // echo "<hr>
+    //         tipo_movimiento: " . (($tipo_movimiento == 1) ? "Ingreso" : "Egreso" ) . "<br>
+    //         fecha_movimiento: " . date("d/m/Y", strtotime($fecha_movimiento)) . "<br>
+    //         monto_movimiento: " . number_format($monto_movimiento, 2, ",", ".") . "<br>
+    //         comentario_movimiento: $comentario_movimiento";
 
-    /* Declaro y ejecuto la query */
-    $sentencia_query    = "INSERT INTO movimientos(monto_movimiento, fecha_movimiento, tipo_movimiento, comentario_movimiento, fecha_registro) VALUES(?, ?, ?, ?, NOW());";
+    /* Declaro y ejecuto transaction y la query */
+    $sentencia_transaction    = "START TRANSACTION;";
+    $preparacion_transaction  = $conexion->query($sentencia_transaction);
+
+    $sentencia_query    = "INSERT INTO movimientos(monto_movimiento, fecha_movimiento, id_tipo_movimiento, comentario_movimiento, fecha_registro_movimiento) VALUES(?, ?, ?, ?, NOW());";
     $preparacion_query  = $conexion->prepare($sentencia_query);
     $resultado_query    = $preparacion_query->execute([$monto_movimiento, $fecha_movimiento, $tipo_movimiento, $comentario_movimiento]);
 
-    /* Verifico el resultado */
+    /* Verifico el resultado. Según éste, veo cómo proseguir con la transaction */
     if($resultado_query){
+        // Todo correcto
         echo "<hr>Insertado correctamente<hr>";
+        
+        // Cierro/commit transaction
+        $sentencia_transaction    = "COMMIT;";
+        $preparacion_transaction  = $conexion->query($sentencia_transaction);
+
     }else{
-        echo "<hr>Algo salió mal. Verifikeichan manin<hr>";
+        // Error en la inserción
+        echo "<hr>Algo salió mal. Verificar.<hr>";
+        
+        // Devuelvo/rollback transaction
+        $sentencia_transaction    = "ROLLBACK;";
+        $preparacion_transaction  = $conexion->query($sentencia_transaction);
     }
 
+    // Cierro conexión
+    $conexion = null;
+
+    // Salgo del proceso
     exit("<a href='../index.php?opcion=insertar'>Volver</a>");
 ?>

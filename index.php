@@ -13,7 +13,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><?=ucfirst($opcion)?> - Transacciones</title>
+        <title><?php echo ucfirst($opcion); ?> - Transacciones</title>
 
         <style>
             .opciones{
@@ -34,10 +34,10 @@
     <body>
         <ul>
             <li>MENÚ DE TRANSACCIONES</li>
-            <li><a href="?opcion=consultar" class="opciones <?=$clase_opcion['consultar']?>">Ver Resumen de movimientos</a></li>
-            <li><a href="?opcion=insertar" class="opciones <?=$clase_opcion['insertar']?>">Agregar</a></li>
-            <li><a href="?opcion=modificar" class="opciones <?=$clase_opcion['modificar']?>">Modificar</a></li>
-            <li><a href="?opcion=eliminar" class="opciones <?=$clase_opcion['eliminar']?>">Eliminar</a></li>
+            <li><a href="?opcion=consultar" class="opciones <?php echo $clase_opcion['consultar']; ?>">Ver Resumen de movimientos</a></li>
+            <li><a href="?opcion=insertar" class="opciones <?php echo $clase_opcion['insertar']; ?>">Agregar</a></li>
+            <li><a href="?opcion=modificar" class="opciones <?php echo $clase_opcion['modificar']; ?>">Modificar</a></li>
+            <li><a href="?opcion=eliminar" class="opciones <?php echo $clase_opcion['eliminar']; ?>">Eliminar</a></li>
         </u>
         
         <?php require "vistas/$opcion.php"; ?>
