@@ -1,0 +1,52 @@
+/* Seteos generales */
+*{
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    z-index: 0;
+}
+
+body{
+    background: rgb(207, 224, 255);
+}
+
+#contenedor_menu{
+    width: 100%;
+    height: 4rem;
+    background:rgb(15, 15, 15);
+    float: left;
+}
+
+    #lista_menu li, #lista_menu li a{
+        padding: 20px 30px 5px;
+        float: left;
+    }
+
+    #item_menu{
+        color: rgb(227, 227, 227);
+        font-weight: 15px;
+    }
+
+    .opciones{
+        color: rgb(224, 224, 224);
+        text-decoration: none;
+    }
+
+    .opcion_seleccionada{
+        background: rgb(36, 149, 36);
+    }
+
+    .opcion_no_seleccionada{
+        background: rgb(113, 113, 113);
+    }
+
+#contenedor_principal{
+    width: 100%;
+    background: rgb(207, 224, 255);
+}
+
+    #contenedor_contenido{
+        width: 60%;
+        margin: 10% auto;
+        float: left;
+    }

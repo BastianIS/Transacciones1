@@ -26,18 +26,17 @@
     $ejecucion_query = $conexion->query($sentencia_query);
     $resultado_query = $ejecucion_query->fetchAll(PDO::FETCH_OBJ);
 
+    /* Ruteo y validación */
     // print_r($resultado_query);
     
-    // Resultado
+    // Resultados
     if($resultado_query[0]->total_registros){
         // Todo correcto
-        echo "<h2>TOTALES:</h2>";
 		echo "<h3>Total de Transacciones: " . $resultado_query[0]->total_registros . "</h3>";
+		echo "<h3>Ganancias Hasta Hoy: $" . $resultado_query[0]->sumatoria_general . "</h3><hr>";
 		echo "<h3>Ganancias de Hoy: $" . $resultado_query[0]->sumatoria_hoy . "</h3>";
 		echo "<h3>Ganacias del Mes Actual: $" . $resultado_query[0]->sumatoria_mes_actual . "</h3>";
 		echo "<h3>Ganancias del Año Actual: $" . $resultado_query[0]->sumatoria_anio_actual . "</h3><hr>";
-        echo "<h2>Históricos:</h2>";
-		echo "<h3>Ganancias Hasta Hoy: $" . $resultado_query[0]->sumatoria_general . "</h3>";
 		echo "<h3>Monto Total de Ingresos: $" . $resultado_query[0]->ingresos_totales . "</h3>";
 		echo "<h3>Monto Total de Egresos: $" . $resultado_query[0]->egresos_totales . "</h3>";
 		echo "<h3>Monto Total Movido: $" . $resultado_query[0]->monto_total_movido . "</h3>";
