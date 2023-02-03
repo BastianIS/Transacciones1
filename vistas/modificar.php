@@ -5,28 +5,27 @@
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            /* Creación y población de la tabla */
+            /* Creación y población de la tabla con la data */
             var tabla_data = document.createElement('table');
 
             // Por cada registro se añade una nueva fila
             for (const fila of data){
                 let tr = document.createElement('tr');
 
-                // otro bucle para recorrer los datos de cada objeto
+                // Recorrer la data de cada objeto
                 for (const atributo of Object.values(fila)) {
 
                     var celda = document.createElement('td');
                     celda.textContent = atributo;
-                    celda.style.border = '1px solid';
+                    celda.style.border = '1px black solid';
                     tr.appendChild(celda);
                 }
 
                 tr.appendChild(celda);
-
                 tabla_data.appendChild(tr);
             }
-            //
-            document.getElementById("contenedor_carga").appendChild(tabla);
+        
+            document.getElementById("contenedor_carga").appendChild(tabla_data);
         })
 </script>
 
