@@ -1,33 +1,27 @@
 <script>
     /* Consulta 'Ajax' con Fetch */
-    const url = "proc/consultar_todo.php"; 
+    let url = "proc/consultar_todo.php"; 
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            /* Creación y población de la tabla con la data */
-            var tabla_data = document.createElement('table');
+    const getData = url => {
+        return new Promise((resolve, reject) => {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => resolve(data))
+                .catch(error => reject(error));
+        });
+    };
 
-            // Por cada registro se añade una nueva fila
-            for (const fila of data){
-                let tr = document.createElement('tr');
+    // getData(url)
+    //     .then(data => funcion_salida_data(data))
+    //     .catch(error => alert(`Error!\n${error}`));
 
-                // Recorrer la data de cada objeto
-                for (const atributo of Object.values(fila)) {
+    const funcion_salida_data = data => {
+        console.log(data);
+    };
 
-                    var celda = document.createElement('td');
-                    celda.textContent = atributo;
-                    celda.style.border = '1px black solid';
-                    tr.appendChild(celda);
-                }
-
-                tr.appendChild(celda);
-                tabla_data.appendChild(tr);
-            }
-        
-            document.getElementById("contenedor_carga").appendChild(tabla_data);
-        })
 </script>
 
 <!-- Carga de la data solicitada por Fetch -->
-<div id="contenedor_carga"></div>
+<div id="contenedor_carga">
+<?php require "proc/consultar_todo.php"; ?>
+</div>

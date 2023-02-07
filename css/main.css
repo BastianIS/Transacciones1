@@ -46,7 +46,11 @@ body{
 }
 
     #contenedor_contenido{
-        width: 60%;
+        width: 80%;
         margin: 10% auto;
         float: left;
     }
+
+        #contenedor_carga, #contenedor_carga table{
+            width: 100%;
+        }
