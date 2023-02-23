@@ -32,17 +32,17 @@
     // print_r($data);
 ?>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Monto</th>
-                <th>Fecha de movimiento</th>
-                <th>Tipo de movimiento</th>
-                <th>Comentario</th>
-                <th>Fecha del registro</th>
-                <th>Eliminado</th>
-                <th>Acciones</th>
+                <th class='text-center col-sm-1'>ID</th>
+                <th class='text-center'>Fecha del registro</th>
+                <th class='text-center'>Monto</th>
+                <th class='text-center'>Fecha de movimiento</th>
+                <th class='text-center'>Tipo de movimiento</th>
+                <th class='text-center'>Comentario</th>
+                <th class='text-center col-sm-1'>Eliminado</th>
+                <th class='text-center'>Acciones</th>
             </tr>
         </thead>
         <tbody id="data_tabla"></tbody>
@@ -53,28 +53,33 @@
 
         print("
             <form action='proc/modificar.php' method='POST'>
-            <tr>
-                <td><input type='number' name='id_mov' placeholder='ID Movimiento' value='" . $resultados->id_movimiento . "' disabled required></td>
-                <td><input type='datetime' name='fecha_reg' placeholder='Fecha de Registro' value='" . $resultados->fecha_registro_movimiento . "' disabled required></td>
-                <td><input type='number' name='monto' placeholder='Monto Movimiento' value='" . $resultados->monto_movimiento . "' required></td>
-                <td><input type='date' name='fecha_mov' placeholder='Fecha Movimiento' value='" . $resultados->fecha_movimiento . "' required></td>
-                <td>
+            <tr " . (($resultados->eliminado_movimiento) ? "class='table-danger'" : "") . ">
+                <td class=' col-sm-1'><input type='number' name='id_mov' class='form-control input-sm' placeholder='ID Movimiento' value='" . $resultados->id_movimiento . "' disabled required></td>
+                <td class=''><input type='datetime' name='fecha_reg' class='form-control' placeholder='Fecha de Registro' value='" . $resultados->fecha_registro_movimiento . "' disabled required></td>
+                <td class=''><input type='number' name='monto' class='form-control' placeholder='Monto Movimiento' value='" . $resultados->monto_movimiento . "' required></td>
+                <td class=''><input type='date' name='fecha_mov' class='form-control' placeholder='Fecha Movimiento' value='" . $resultados->fecha_movimiento . "' required></td>
+                <td class=''>
         ");
 
         foreach($tipo_movimiento as $resultados_tm)
             print(
                 $resultados_tm->glosa_tipo_movimiento .
-                " <input type='radio' name='tipo_mov' value='" . $resultados_tm->id_tipo_movimiento . "'
-                " . (($resultados->id_tipo_movimiento==$resultados_tm->id_tipo_movimiento)?"checked":"") . ">
+                "<input type='radio' name='tipo_mov' value='" . $resultados_tm->id_tipo_movimiento . "'
+                " . (($resultados->id_tipo_movimiento == $resultados_tm->id_tipo_movimiento) ? "checked" : "") . ">&nbsp;
             ");
 
         print(" 
                 </td>
-                <td><input type='text' name='comentario' placeholder='Comentario Movimiento' value='" . $resultados->comentario_movimiento . "'></td>
-                <td><input type='checkbox' name='eliminado' " . (($resultados->eliminado_movimiento)?"checked":"") . "></td>
-                <td>
-                    <button><i class='fa fa-trash' aria-hidden='true'></i></button>
-                    <button><i class='fa fa-pencil' aria-hidden='true'></i></button>
+                <td class=''><input type='text' name='comentario' class='form-control' placeholder='Comentario Movimiento' value='" . $resultados->comentario_movimiento . "'></td>
+                <td class=' col-sm-1'><input type='checkbox' name='eliminado' " . (($resultados->eliminado_movimiento) ? "checked":"") . "></td>
+                <td class=''>
+                    <button type='button' class='btn btn-outline-success' onclick='modificar_item()'>
+                        <i class='fa fa-floppy-o' aria-hidden='true'></i>
+                    </button>
+                    &nbsp;
+                    <button type='button' class='btn btn-outline-danger' onclick='eliminar_item()'>
+                        <i class='fa fa-trash' aria-hidden='true'></i>
+                    </button>
                 </td>
             </tr>
             </form>
